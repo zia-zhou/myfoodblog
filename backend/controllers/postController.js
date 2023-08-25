@@ -7,23 +7,40 @@ const User = require('../models/userModel')
 // @route   GET /api/posts
 // @access  Private
 const getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({ user: req.user.id })
+  // Find users with the role 'admin'
+  const adminUsers = await User.find({ role: 'admin' });
 
-  res.status(200).json(posts)
-})
+  // Collect user IDs of admin users
+  const adminUserIds = adminUsers.map(user => user._id);
+
+  // Fetch posts from admin users and sort by creation date
+  const posts = await Post.find({ user: { $in: adminUserIds } })
+    .sort({ createdAt: 'asc' })
+    .exec();
+
+  res.status(200).json(posts);
+});
 
 // @desc    Set post
 // @route   POST /api/posts
 // @access  Private
 const setPost = asyncHandler(async (req, res) => {
+   // Check if the user making the request is an admin
+   if (req.user.role !== 'admin') {
+    res.status(403); // Forbidden
+    throw new Error('Only users with role "admin" can create posts');
+  }
   if (!req.body.text) {
     res.status(400)
     throw new Error('Please add a text field')
   }
 
   const post = await Post.create({
+    title:req.body.title,
     text: req.body.text,
     user: req.user.id,
+    
+    
   })
 
   res.status(200).json(post)

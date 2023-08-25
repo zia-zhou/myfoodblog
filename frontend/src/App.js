@@ -5,7 +5,8 @@ import Header from './components/Header'
 import Display from './pages/Display'
 import Login from './pages/Login'
 import Register from './pages/Register'
-
+import PostForm from './pages/PostForm'
+import RegisterAdmin from './pages/RegisterAdmin'
 function App() {
   return (
     <>
@@ -16,6 +17,8 @@ function App() {
             <Route path='/' element={<Display />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/createPost' element={<PostForm />} />
+            <Route path='/registerAdmin' element={<RegisterAdmin />} />
           </Routes>
         </div>
       </Router>

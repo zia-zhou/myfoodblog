@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import PostForm from '../components/PostForm'
+
 import PostItem from '../components/PostItem'
 import Spinner from '../components/Spinner'
 import { getPosts, reset } from '../features/posts/postSlice'
@@ -40,19 +40,21 @@ function Display() {
         <p>Posts Dashboard</p>
       </section>
 
-      <PostForm />
+     
 
       <section className='content'>
         {posts.length > 0 ? (
           <div className='posts'>
             {posts.map((post) => (
-              <PostItem key={post._id} post={post} />
+              <PostItem key={post._id} post={post} /> 
             ))}
           </div>
         ) : (
           <h3>You have not set any posts</h3>
         )}
       </section>
+
+      
     </>
   )
 }
