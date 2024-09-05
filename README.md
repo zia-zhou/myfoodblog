@@ -5,4 +5,4 @@ Create MongoDB account and link in a dotenv file
 
 ---------------------------------------------
 
-Currently working on Deployment of Website and Displaying full Blog Articles - aiming to complete by 2/20/2024
+Currently working on Deployment of Website and Displaying full Blog Articles - aiming to complete by 10/10/2024
